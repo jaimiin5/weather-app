@@ -1,3 +1,9 @@
+document.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      showTemp();
+    }
+ });
+  
 let showTemp = () => {
     let userInput = document.getElementById('userInput').value;
     let city = userInput;
