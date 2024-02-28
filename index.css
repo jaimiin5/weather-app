@@ -60,6 +60,8 @@ input::placeholder {
 }
 
 .weather-details {
+    position: relative;
+    left: 300px;
     backdrop-filter: blur(70px);
     border-radius: 15px;
     display: flex;
@@ -107,4 +109,8 @@ input::placeholder {
     flex-direction: row;
     gap: 30px;
     align-items: center;
+}
+
+.hidden {
+    display: none;
 }
