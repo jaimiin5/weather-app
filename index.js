@@ -1,9 +1,9 @@
-document.addEventListener("keypress", function(event) {
+document.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
-      showTemp();
+        showTemp();
     }
- });
-  
+});
+
 let showTemp = () => {
     let userInput = document.getElementById('userInput').value;
     let city = userInput;
@@ -13,6 +13,7 @@ let showTemp = () => {
         let longitude = position.coords.longitude;
 
 
+
         let apiUrl;
         if (!city) {
             apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=af9deb16fe2d241e4a5bdeaf5d6bcf6e`;
@@ -20,11 +21,18 @@ let showTemp = () => {
         } else {
             apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=af9deb16fe2d241e4a5bdeaf5d6bcf6e`;
         }
-
+        // when user get the wrod cod which is not 200 and then in the else part user given city is not being fetched from the api
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-
+                if (data.cod !== 200) {
+                    // alert("city not found");
+                    document.querySelector('.weather-details').innerHTML = "city not found";
+                    document.querySelector('.forecast').innerHTML = '';
+                }
+                else {
+                    
+                }
                 // name
                 let city = document.getElementById('city');
                 let name = data.name;
@@ -86,7 +94,6 @@ let showTemp = () => {
                 let visibilityId = document.getElementById('visibilityId');
                 let visibility = (data.visibility / 1000);
                 visibilityId.textContent = 'Visibility ' + visibility + ' Km/h';
-
 
             })
             .catch(err => console.error(err))
@@ -153,9 +160,6 @@ let showTemp = () => {
                         }
                     }
                 }
-
-
-
 
             })
             .catch(err => console.error(err))
